@@ -133,24 +133,12 @@ The dataset skews toward pop and lofi, so users with other tastes will get fewer
 
 ## Reflection
 
-Read and complete `model_card.md`:
-
-[**Model Card**](model_card.md)
-
-Write 1 to 2 paragraphs here about what you learned:
-
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
-
+Building this recommender showed me that prediction is really just structured comparison. The system does not actually understand music. It just measures distance between numbers and hands out points. What surprised me most was how persistent genre bias was even after I reduced its weight in the experiment. That helped me understand why real platforms can feel repetitive. When a system is trained to match categories, it keeps pulling users back to the same type of music.
+Using AI tools throughout this project was useful for generating code and explaining tradeoffs, but I had to stay alert. The tools occasionally gave me code that looked right but had subtle issues like duplicate functions in my recommender file. The moments where I caught those errors were the moments I actually understood what the code was doing.
+If I extended this project I would focus on two things. First I would add more songs per underrepresented genre so the catalog is more balanced. Second I would build a diversity feature so the top results always include songs from more than one genre even when one genre dominates the score.
 
 ---
 
-## 7. `model_card_template.md`
-
-Combines reflection and model card framing from the Module 3 guidance. :contentReference[oaicite:2]{index=2}  
-
-```markdown
-# 🎧 Model Card - Music Recommender Simulation
 
 ## 1. Model Name
 
@@ -162,46 +150,45 @@ Give your recommender a name, for example:
 
 ## 2. Intended Use
 
-- What is this system trying to do
-- Who is it for
+This system suggests songs from a small catalog based on a user's preferred genre,
+mood, and numerical taste targets like energy and tempo. It is designed for classroom
+exploration only, not for real users or production use. It assumes the user has a
+single fixed taste profile and knows exactly what genre and mood they want.
 
-Example:
-
-> This model suggests 3 to 5 songs from a small catalog based on a user's preferred genre, mood, and energy level. It is for classroom exploration only, not for real users.
-
----
 
 ## 3. How It Works (Short Explanation)
 
-Describe your scoring logic in plain language.
-
-- What features of each song does it consider
-- What information about the user does it use
-- How does it turn those into a number
-
-Try to avoid code in this section, treat it like an explanation to a non programmer.
+The system compares each song in the catalog to a user's taste profile and gives it
+a score. A genre match adds the most points because genre is the strongest signal of
+overall taste. A mood match adds slightly fewer points. For numerical features like
+energy, tempo, valence, danceability, and acousticness, the system rewards songs that
+are closest to the user's target value rather than just high or low. Once every song
+has a score, the system sorts them from highest to lowest and returns the top results.
+Think of it like a judge scoring contestants. Each song gets rated on how well it
+matches what the user asked for, and the best matches rise to the top.
 
 ---
 
 ## 4. Data
 
-Describe your dataset.
 
-- How many songs are in `data/songs.csv`
-- Did you add or remove any songs
-- What kinds of genres or moods are represented
-- Whose taste does this data mostly reflect
+The catalog contains 18 songs across genres including lofi, pop, rock, jazz, ambient,
+synthwave, indie pop, r&b, country, classical, blues, and folk. Moods represented
+include happy, chill, intense, relaxed, focused, moody, euphoric, and sad. The
+original starter dataset had 10 songs, mostly lofi and pop. Eight songs were added to
+improve genre and mood diversity. Pop and lofi still have more songs than other genres,
+which affects recommendation quality for underrepresented tastes.
 
 ---
 
 ## 5. Strengths
 
-Where does your recommender work well
-
-You can think about:
-- Situations where the top results "felt right"
-- Particular user profiles it served well
-- Simplicity or transparency benefits
+The system works best for users who prefer lofi or pop because those genres have the
+most songs in the catalog, giving the recommender more options to differentiate
+between. The scoring logic is fully transparent. Every recommendation comes with a
+breakdown of exactly why each song was chosen. The proximity formula for numerical
+features is also a strength because it rewards close matches rather than just extreme
+values, which makes recommendations feel more tuned to the user.
 
 ---
 
@@ -225,13 +212,12 @@ The biggest surprise was that Baby Steps by Jay Belmont ranked above Sunrise Cit
 
 ## 8. Future Work
 
-If you had more time, how would you improve this recommender
-
-Examples:
-
-- Add support for multiple users and "group vibe" recommendations
-- Balance diversity of songs instead of always picking the closest match
-- Use more features, like tempo ranges or lyric themes
+Add more songs per genre to reduce the drop off problem for underrepresented tastes.
+Implement a diversity penalty that prevents too many songs from the same genre
+appearing in the top results. Add support for mixed taste profiles where a user can
+specify interest in multiple genres with different weights. Replace exact genre
+matching with a similarity score so adjacent genres like synthwave and electronic can
+still earn partial points.
 
 ---
 
