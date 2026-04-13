@@ -10,7 +10,27 @@ This simulation builds a content-based music recommender in Python that scores s
 
 Real-world platforms like Spotify use a mix of collaborative filtering (recommending based on what similar users liked) and content-based filtering (recommending based on a song's own attributes like genre, mood, and energy). This simulation focuses purely on content-based filtering -- it compares song attributes directly to a user's stated preferences, with no behavioral data involved.
 
-Each song in the catalog has four features: genre, mood, energy (a 0.0 to 1.0 scale), and tempo in BPM. The user profile stores a target genre, target mood, and target energy level. The recommender loops through every song and gives it a score based on how well it matches those targets. Genre match awards +2.0 points, mood match awards +1.0 point, and energy closeness adds up to +1.0 using a proximity formula (1 - absolute difference) that rewards songs closer to the user's target rather than just high or low energy. The songs are then sorted by total score and the top K results are returned.
+
+Algorthm Recipe: 
+Each song is scored by comparing its attributes to the user's target profile. Genre match awards +2.0 points and mood match awards +1.0 because categorical matches are the strongest signal of taste. The five numerical features (energy, tempo, valence, danceability, acousticness) each contribute up to +1.0 using a proximity formula that rewards closeness to the user's target value. The maximum possible score is 7.0. Songs are then sorted from highest to lowest score and the top K results are returned.
+
+```mermaid
+flowchart TD
+    A[User Profile\nfavorite_genre, favorite_mood,\ntarget_energy, target_tempo,\ntarget_valence, target_danceability,\ntarget_acousticness] --> C[Score Each Song]
+    B[songs.csv\n18 songs] --> C
+    C --> D{For each song...}
+    D --> E[+2.0 if genre matches]
+    D --> F[+1.0 if mood matches]
+    D --> G[up to +1.0 energy closeness]
+    D --> H[up to +1.0 tempo closeness]
+    D --> I[up to +1.0 valence closeness]
+    D --> J[up to +1.0 danceability closeness]
+    D --> K[up to +1.0 acousticness closeness]
+    E & F & G & H & I & J & K --> L[Total Score\nmax 7.0]
+    L --> M[Sort all songs\nhighest to lowest]
+    M --> N[Return Top K\nRecommendations]
+```
+
 
 Expected bias: this system will strongly favor lofi songs for the default profile because genre is worth more than any single numerical feature. A great match on all five numerical features (5.0 points) still loses to any song that matches genre and mood (3.0 points plus some numerical score).
 
@@ -19,7 +39,7 @@ Expected bias: this system will strongly favor lofi songs for the default profil
 
 Song features: genre, mood, energy, tempo_bpm, valence, danceability, acousticness
 
-User profile stores: favorite_genre favorite_mood, target_energy
+User profile stores: favorite_genre favorite_mood, target_energy,  target_tempo_bpm, target_valence, target_danceability, target_acousticness
 
 Scoring weights: genre match (+2.0), mood match (+1.0), energy closeness (up to +1.0)
 
