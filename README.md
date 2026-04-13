@@ -2,17 +2,7 @@
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
-
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-Replace this paragraph with your own summary of what your version does.
-
+This simulation builds a content-based music recommender in Python that scores songs from a small catalog against a user's taste profile. It awards points for matching genre and mood, and uses a proximity formula to reward songs whose numerical features (energy, tempo, valence, danceability, acousticness) are closest to the user's targets. The top K songs by total score are returned as personalized recommendations.
 ---
 
 ## How The System Works
@@ -22,7 +12,12 @@ Real-world platforms like Spotify use a mix of collaborative filtering (recommen
 
 Each song in the catalog has four features: genre, mood, energy (a 0.0 to 1.0 scale), and tempo in BPM. The user profile stores a target genre, target mood, and target energy level. The recommender loops through every song and gives it a score based on how well it matches those targets. Genre match awards +2.0 points, mood match awards +1.0 point, and energy closeness adds up to +1.0 using a proximity formula (1 - absolute difference) that rewards songs closer to the user's target rather than just high or low energy. The songs are then sorted by total score and the top K results are returned.
 
-Song features: genre, mood, energy, tempo_bpm
+Expected bias: this system will strongly favor lofi songs for the default profile because genre is worth more than any single numerical feature. A great match on all five numerical features (5.0 points) still loses to any song that matches genre and mood (3.0 points plus some numerical score).
+
+
+
+
+Song features: genre, mood, energy, tempo_bpm, valence, danceability, acousticness
 
 User profile stores: favorite_genre favorite_mood, target_energy
 
