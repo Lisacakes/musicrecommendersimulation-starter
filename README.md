@@ -237,9 +237,8 @@ Examples:
 
 ## 9. Personal Reflection
 
-A few sentences about what you learned:
+Building this recommender showed me that prediction is really just structured comparison. The system does not actually understand music. It just measures distance between numbers and hands out points. What surprised me most was how persistent genre bias was even after I reduced its weight in the experiment. That helped me understand why real platforms can feel repetitive. When a system is trained to match categories, it keeps pulling users back to the same type of music.
+Using AI tools throughout this project was useful for generating code and explaining tradeoffs, but I had to stay alert. The tools occasionally gave me code that looked right but had subtle issues like duplicate functions in my recommender file. The moments where I caught those errors were the moments I actually understood what the code was doing.
+If I extended this project I would focus on two things. First I would add more songs per underrepresented genre so the catalog is more balanced. Second I would build a diversity feature so the top results always include songs from more than one genre even when one genre dominates the score.
 
-- What surprised you about how your system behaved
-- How did building this change how you think about real music recommenders
-- Where do you think human judgment still matters, even if the model seems "smart"
 
