@@ -107,6 +107,16 @@ Midnight Coding by LoRoom
 Score: 7.82
 ...
 ```
+
+
+
+Experiment 2 -- Accuracy check
+For the High Energy Pop Fan profile, Baby Steps ranked above Sunrise City despite Sunrise City feeling like the more intuitive match. The algorithm favored Baby Steps because its danceability and tempo were numerically closer to the target. This shows that content-based filtering can produce technically correct but musically unintuitive results.
+
+Experiment 3 -- Weight shift (energy x2, genre halved)
+Doubling energy and halving genre changed individual rankings within profiles but did not change which songs dominated overall. Genre match is still the strongest single signal even at +1.0 because no other feature can compensate for a genre mismatch across the whole catalog.
+
+
 ---
 
 ## Limitations and Risks
