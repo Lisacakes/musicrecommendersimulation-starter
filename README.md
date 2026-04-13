@@ -92,15 +92,13 @@ Use this section to document the experiments you ran. For example:
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
+The catalog is small (18 songs), so results will feel repetitive across different profiles
+Genre carries the most weight, which means a great mood and energy match can still lose to a mediocre genre match
 
-Examples:
+The system has no memory -- it treats every session as if the user is brand new
+It cannot understand lyrics, language, or cultural context
 
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+The dataset skews toward pop and lofi, so users with other tastes will get fewer strong matches
 
 ---
 
