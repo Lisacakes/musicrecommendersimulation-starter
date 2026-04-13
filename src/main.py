@@ -11,6 +11,19 @@ You will implement the functions in recommender.py:
 
 from recommender import load_songs, recommend_songs
 
+user_prefs = {
+    "favorite_genre": "lofi",
+    "favorite_mood": "chill",
+    "target_energy": 0.38,
+    "target_tempo_bpm": 75,
+    "target_valence": 0.58,
+    "target_danceability": 0.60,
+    "target_acousticness": 0.80
+}
+
+
+
+
 
 def main() -> None:
     songs = load_songs("data/songs.csv") 
