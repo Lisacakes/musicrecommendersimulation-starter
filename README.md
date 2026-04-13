@@ -17,17 +17,16 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
 
-Some prompts to answer:
+Real-world platforms like Spotify use a mix of collaborative filtering (recommending based on what similar users liked) and content-based filtering (recommending based on a song's own attributes like genre, mood, and energy). This simulation focuses purely on content-based filtering -- it compares song attributes directly to a user's stated preferences, with no behavioral data involved.
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+Each song in the catalog has four features: genre, mood, energy (a 0.0 to 1.0 scale), and tempo in BPM. The user profile stores a target genre, target mood, and target energy level. The recommender loops through every song and gives it a score based on how well it matches those targets. Genre match awards +2.0 points, mood match awards +1.0 point, and energy closeness adds up to +1.0 using a proximity formula (1 - absolute difference) that rewards songs closer to the user's target rather than just high or low energy. The songs are then sorted by total score and the top K results are returned.
 
-You can include a simple diagram or bullet list if helpful.
+Song features: genre, mood, energy, tempo_bpm
+
+User profile stores: favorite_genre favorite_mood, target_energy
+
+Scoring weights: genre match (+2.0), mood match (+1.0), energy closeness (up to +1.0)
 
 ---
 
