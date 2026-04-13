@@ -207,26 +207,19 @@ You can think about:
 
 ## 6. Limitations and Bias
 
-Where does your recommender struggle
-
-Some prompts:
-- Does it ignore some genres or moods
-- Does it treat all users as if they have the same taste shape
-- Is it biased toward high energy or one genre by default
-- How could this be unfair if used in a real product
+The system has a strong genre bias because genre match is worth +2.0 points, more than any single numerical feature. This means a song that perfectly matches the user's energy, tempo, valence, danceability, and acousticness can still lose to a mediocre song that simply shares the same genre label.
+The catalog is too small and unevenly distributed. Pop and lofi have multiple songs each, so users who prefer those genres get more varied and accurate recommendations. Users who prefer rock, blues, or classical only have one song each in the catalog, so their results drop off sharply after the first recommendation.
+This creates a filter bubble effect where users are consistently shown the same small pool of songs from their preferred genre and rarely discover music from other genres that might actually match their vibe numerically.
+The system also treats all users as having the same preference shape. It assumes everyone wants an exact match on genre and mood. A user who wants to discover new genres, or who has mixed taste, would be poorly served by this design.
 
 ---
 
 ## 7. Evaluation
 
-How did you check your system
-
-Examples:
-- You tried multiple user profiles and wrote down whether the results matched your expectations
-- You compared your simulation to what a real app like Spotify or YouTube tends to recommend
-- You wrote tests for your scoring logic
-
-You do not need a numeric metric, but if you used one, explain what it measures.
+I tested the system with four distinct user profiles: Chill Lofi Studier, High Energy Pop Fan, Deep Intense Rock, and Sad Acoustic. For each profile I observed the top 5 results and compared them to what felt musically intuitive.
+The lofi and pop profiles produced the most varied and satisfying results because those genres had more songs in the catalog. The rock and blues profiles exposed a clear weakness -- after the first result, scores dropped sharply because there was only one song per genre, forcing the system to recommend numerically close songs from completely different genres.
+I also ran a weight experiment where I doubled the energy score and halved the genre score. The rankings shifted slightly within profiles but the overall dominance of genre matching remained, showing that even at half weight, genre is still the strongest signal in the system.
+The biggest surprise was that Baby Steps by Jay Belmont ranked above Sunrise City for the High Energy Pop Fan profile despite Sunrise City feeling like the more intuitive match. This showed that technically correct scores don't always produce musically satisfying results.
 
 ---
 
