@@ -82,12 +82,15 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
+Experiment 1 -- Four diverse profiles
+The lofi and pop profiles returned strong varied results because those genres have more songs in the catalog. The rock and blues profiles showed a sharp drop after the first result, revealing that underrepresented genres get weaker recommendations overall.
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
 
+![profile output ](images/profile_output.png)
+![profile output 1](images/profile_output1.png)
+![profile output 2](images/profile_output2.png)
+![profile output 3](images/profile_output3.png)
+![profile output 4](images/profile_output4.png)
 ![Lofi Profile Output](images/terminal_output.png)
 
 
