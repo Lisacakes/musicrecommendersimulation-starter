@@ -88,6 +88,22 @@ Use this section to document the experiments you ran. For example:
 - What happened when you added tempo or valence to the score
 - How did your system behave for different types of users
 
+![Lofi Profile Output](images/terminal_output.png)
+
+
+```
+Loaded songs: 18
+
+Top recommendations:
+
+Library Rain by Paper Lanterns
+Score: 7.86
+Because: genre match (+2.0), mood match (+1.0), energy closeness (+0.97)...
+
+Midnight Coding by LoRoom
+Score: 7.82
+...
+```
 ---
 
 ## Limitations and Risks
